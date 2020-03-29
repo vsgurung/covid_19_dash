@@ -15,6 +15,7 @@ external_stylesheets = ['https://fonts.googleapis.com/css?family=Nunito', 'https
 app = dash.Dash(__name__, assets_folder='./assets/', external_stylesheets=external_stylesheets)
 
 server = app.server # This line is needed for heroku
+app.config['suppress_callback_exceptions'] = True
 app.title = 'COVID-19 UK Metrics'
 
 
