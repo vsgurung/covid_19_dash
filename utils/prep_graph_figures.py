@@ -25,11 +25,11 @@ daily_metrics_figure = {'data':[{'x':daily_confirmed_cases['DateVal'],
                                 'annotations':[{
                                                 'xref':'paper',
                                                 'yref':'paper',
-                                                'x':0.10,
+                                                'x':0.5,
                                                 'y':-0.15,
                                                 'xanchor':'center',
                                                 'yanchor':'bottom',
-                                                'text':'The bar in red colour is the highest reported case.',
+                                                'text':'The bar in red colour is the highest reported case in a day.',
                                                 'showarrow':False
                                                 }]
                                 }
@@ -52,7 +52,7 @@ daily_cumulative_figure = {'data':[{'x':daily_confirmed_cases['DateVal'],
                                                 'xref':'paper',
                                                 'yref':'paper',
                                                 'x':0.5,
-                                                'y':-0.2,
+                                                'y':-0.15,
                                                 'xanchor':'center',
                                                 'yanchor':'bottom',
                                                 'text':'People who have recovered and those who have died are included in cumulative counts.',
