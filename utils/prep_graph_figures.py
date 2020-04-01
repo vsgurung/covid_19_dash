@@ -29,7 +29,7 @@ daily_metrics_figure = {'data':[{'x':daily_confirmed_cases['DateVal'],
                                                 'y':-0.15,
                                                 'xanchor':'center',
                                                 'yanchor':'bottom',
-                                                'text':'The bar in red colour is the highest reported case in a day.',
+                                                'text':'The bar in red colour is the highest reported case on the day.',
                                                 'showarrow':False
                                                 }]
                                 }
