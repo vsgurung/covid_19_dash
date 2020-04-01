@@ -2,6 +2,7 @@
 from . import fetch_data
 import datetime
 # import fetch_data
+# need to create function instead of variables.
 
 daily_confirmed_cases = fetch_data.daily_confirmed_cases()
 daily_indicators = fetch_data.daily_indicators()

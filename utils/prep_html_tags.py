@@ -46,19 +46,24 @@ from .prep_graph_figures import county_ua_figure, daily_cumulative_figure, daily
 # scotland_death_perc_msg = generate_perc_change_message(scotland_death_perc)
 
 # Header tag for the page heading
-heading_tag = html.H1(f'UK COVID-19 Metrics as of {dt_for_heading}', style={'textAlign':'center', 'fontWeight':'bold'})
+def generate_heading_tag():
+    heading_tag = html.H1(f'UK COVID-19 Metrics as of {dt_for_heading}', style={'textAlign':'center', 'fontWeight':'bold'})
+    return heading_tag
 
 # Markdown content
-markdown_tag = html.Div([
+def generate_markdown_tag():
+    markdown_tag = html.Div([
                             dcc.Markdown(f"""The first confirmed case of COVID-19 in the UK was [reported](https://www.standard.co.uk/news/health/coronavirus-35-cases-timeline-uk-covid19-new-a4375311.html "Evening Standard Report") on 31 Jan 2020. {days_elapsed} days have elapsed and the number of people affected has increased considerably.
                                             This dashboard displays the data as of {dt_for_heading}. This data is supplied by [Public Health England](https://www.gov.uk/government/publications/covid-19-track-coronavirus-cases "Public Health England COVID-19 Page").
                                             The metrics on this page updates as and when the underlying data powering this dashboard changes. If the data doesn't change, please clear the web browser cache and try refreshing the page again. The National Health Service (NHS) advice regarding COVID-19 for everyone can be found [here](https://www.nhs.uk/conditions/coronavirus-covid-19/). \nThe percentage refers to increase/decrease in past 24 hours. 
                                         """),
                             dcc.Markdown("""This dashboard is work in progress and is being improved continuously.""")]
                             , style={'textAlign':'justify', 'width':'100%', 'margin':'auto'})
+    return markdown_tag
 
 # Left columns divs, html and graphs
-left_column_tags = html.Div([
+def generate_left_column_tags():
+    left_column_tags = html.Div([
                         html.Div([
                             html.Div([
                                 html.H2('Total UK Cases', style={'textAlign':'center', 'fontWeight':'bold', 'color': '#bf3afc'}),
@@ -95,9 +100,11 @@ left_column_tags = html.Div([
                                 figure=county_ua_figure,
                                 config={'displaylogo':False})],                
                                 style={'width':'100%'})
-                        ], className="four columns", style={'width':'40%', 'backgroundColor':'#B9BBBD'}, )
+                        ])
+    return left_column_tags
 
-right_column_tags = html.Div([
+def generate_right_column_tags():
+    right_column_tags = html.Div([
                         html.Div([
                             html.Div([
                                 html.Div([
@@ -132,11 +139,12 @@ right_column_tags = html.Div([
                                 config = {'displaylogo':False}
                                 )
                         ])
-                    ], className="eight columns", style={'width':'60%', 'backgroundColor':'#B9BBBD'})
+                    ])
+    return right_column_tags
 
 # Footer
-
-footer = html.Div(
+def generate_footer_tags():
+    footer = html.Div(
           id='my-footer',
           style={'marginLeft': '1.5%', 'marginRight': '1.5%', 'marginBottom': '1%', 'marginTop': '.5%'},
                  children=[
@@ -144,12 +152,12 @@ footer = html.Div(
                      html.P(style={'textAlign': 'center', 'margin': 'auto'},
                             children=['Developed by Vidya with ❤️', ' | ',
                                       'Stay at Home, Protect the NHS, Save Lives'
-                                    ]
-                      )
-                  ]
-              )
+                                    ])
+                  ])
+    return footer
 
 # Error page if not connected to internet.
-error_page = html.Div(
-                html.H1('It seems, there is network connectivity issue. Please check your internet connection.')
-            )
+# This is not needed for the moment so commenting it out.
+# error_page = html.Div(
+#                 html.H1('It seems, there is network connectivity issue. Please check your internet connection.')
+#             )
