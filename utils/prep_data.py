@@ -56,6 +56,7 @@ dt_for_heading = latest_date().strftime('%d %b %Y')
 total_uk_cases = daily_indicators.iloc[0]['TotalUKCases']
 new_uk_cases = daily_indicators.iloc[0]['NewUKCases']
 total_uk_deaths = daily_indicators.iloc[0]['TotalUKDeaths']
+daily_uk_deaths = daily_confirmed_cases.iloc[0]['DailyDeaths']
 daily_confirmed_case_perc= calculate_percent_change(daily_confirmed_cases['CumCases'])
 daily_death_perc = calculate_percent_change(daily_confirmed_cases['CumDeaths'])
 recovered_patients = recovery_data['Cumulative Counts'].max()
