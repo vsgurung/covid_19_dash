@@ -24,13 +24,13 @@ app.title = 'COVID-19 UK Metrics'
 suppress_callback_exceptions=True
 app.layout = html.Div([
             html.Div(id='heading-tag'),
-            html.Div(id='markdown-tag'),
+            html.Div(id='markdown-tag', className='container-fluid', style={'backgroundColor': '#ffffff', 'border': '1px solid #ededee'}),
             html.Div([
                 # Left column with UK metrics and County/Unitary Authority Cases
                 html.Div(id='left-column-tag', style={'width':'40%','backgroundColor':'#B9BBBD'}),
                 # Right Column with metrics and the graphs
                 html.Div(id='right-column-tag', style={'width':'60%','backgroundColor':'#B9BBBD'}),
-                ], className="row", style={'display':'flex'}),
+                ], className="container-fluid", style={'display':'flex'}),
                 html.Div(id='footer-tag'),
                 dcc.Interval(
                     id='timer',
