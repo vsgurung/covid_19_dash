@@ -16,7 +16,7 @@ from .prep_data import  dt_for_heading, days_elapsed, daily_confirmed_case_perc,
                         total_scotland_cases, total_scotland_deaths, \
                         total_ni_cases, total_ni_deaths, \
                         total_wales_cases, total_wales_deaths, \
-                        total_uk_cases, total_uk_deaths, new_uk_cases, recovered_patients
+                        total_uk_cases, total_uk_deaths, new_uk_cases, recovered_patients, recovery_patients_date
 
 from .prep_graph_figures import county_ua_figure, daily_cumulative_figure, daily_metrics_figure
 
@@ -70,8 +70,8 @@ def generate_left_column_tags():
                                 html.H2(f'{total_uk_cases:,}', style={'textAlign':'center', 'fontWeight':'bold', 'color': '#bf3afc'})
                                 ], style={'width':'50%'}),
                             html.Div([
-                                html.H2('Recovered', style={'textAlign':'center', 'color':'green'}),
-                                html.H1(f'{recovered_patients:,.0f}', style={'textAlign':'center', 'fontWeight':'bold', 'color':'green'})
+                                html.H2(f'Recovered ({recovery_patients_date})', style={'textAlign':'center', 'color':'green'}),
+                                html.H1(f'{recovered_patients:,.0f} ', style={'textAlign':'center', 'fontWeight':'bold', 'color':'green'})
                                 ], style={'width':'50%'})
                         ], className='row', style={'display':'flex'}),
                         html.Div([
@@ -100,7 +100,7 @@ def generate_left_column_tags():
                                 figure=county_ua_figure,
                                 config={'displaylogo':False})],                
                                 style={'width':'100%'})
-                        ])
+                        ], className='container-fluid')
     return left_column_tags
 
 def generate_right_column_tags():
