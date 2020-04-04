@@ -91,7 +91,7 @@ daily_metrics_figure = {'data':[# Adding the daily deaths data
                                                         'color':'#E68A47'
                                                 }
                                         },
-                                        {'text':f'Highest confirmed case :{daily_confirmed_cases["CMODateCount"].max():,} on {highest_recorded_date}',
+                                        {'text':f'Highest Confirmed Case :{daily_confirmed_cases["CMODateCount"].max():,} on {highest_recorded_date}',
                                         'xref':'paper',
                                         'yref':'paper',
                                         'x':0.5,
