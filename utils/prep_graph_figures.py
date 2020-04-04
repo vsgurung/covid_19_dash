@@ -7,9 +7,14 @@ daily_confirmed_cases = fetch_data.daily_confirmed_cases()
 county_ua_cases = fetch_data.county_ua_cases()
 
 # Creating a separate colour for highest reported case of the day. 
-colours = ['#FC7979' if x==daily_confirmed_cases['CMODateCount'].max() else '#909EFC' for x in daily_confirmed_cases['CMODateCount']]
-text = ['Highest Case' if x==daily_confirmed_cases['CMODateCount'].max() else None for x in daily_confirmed_cases['CMODateCount']]
+# colours = ['#FC7979' if x==daily_confirmed_cases['CMODateCount'].max() else '#909EFC' for x in daily_confirmed_cases['CMODateCount']]
+# Extracting row which has the highest daily confirmed case data.
+highest_confirmedcases_subdf = daily_confirmed_cases[daily_confirmed_cases['CMODateCount']==daily_confirmed_cases['CMODateCount'].max()]
+highest_recorded_date = highest_confirmedcases_subdf.iloc[0]['DateVal'].strftime('%d %b %Y')
+highest_deaths_subdf = daily_confirmed_cases[daily_confirmed_cases['DailyDeaths']==daily_confirmed_cases['DailyDeaths'].max()]
+highest_deaths_date = highest_deaths_subdf.iloc[0]['DateVal'].strftime('%d %b %Y')
 
+# text = [f'Highest Case:{x:,}' if x==daily_confirmed_cases['CMODateCount'].max() else None for x in daily_confirmed_cases['CMODateCount']]
 
 # Bar chart
 # daily_metrics_figure = {'data':[{'x':fetch_data.daily_confirmed_cases()['DateVal'],
@@ -55,8 +60,8 @@ daily_metrics_figure = {'data':[# Adding the daily deaths data
                                  'type':'scatter',
                                  'name':'Daily Confirmed Cases',
                                  'mode':'lines+text+markers',
-                                 'text':text,
-                                 'textposition':'left center',
+                                #  'text':text,
+                                #  'textposition':'left center',
                                  'marker':{'color':'rgba(196, 0, 0, 0.56)'},
                                  'fill':'tonexty',
                                  'fillcolor':'rgba(196, 0, 0, 0.56)',
@@ -70,8 +75,42 @@ daily_metrics_figure = {'data':[# Adding the daily deaths data
                                 'paper_bgcolor':'#B9BBBD',
                                 'plot_bgcolor':'#faebd7',
                                 'autosize':True,
+                                'legend_orientation':"h",
                                 'xaxis':{'tickformat':'%d %b'},
-                                'yaxis':{'tickformat':','}
+                                'yaxis':{'tickformat':','},
+                                'annotations':[{'text':'Lockdown from 23 Mar 2020',
+                                                'x':0.5,
+                                                'y':0.8,
+                                                'xref':'paper',
+                                                'yref':'paper',
+                                                'opacity':0.7,
+                                                'showarrow':False,
+                                                'font':{
+                                                        'family':'Arial, sans-serif',
+                                                        'size':15,
+                                                        'color':'#E68A47'
+                                                }
+                                        },
+                                        {'text':f'Highest confirmed case :{daily_confirmed_cases["CMODateCount"].max():,} on {highest_recorded_date}',
+                                        'xref':'paper',
+                                        'yref':'paper',
+                                        'x':0.5,
+                                        'y':0.6,
+                                        'opacity':0.5,
+                                        'showarrow':False,
+                                        'font':{
+                                                        'family':'Arial, sans-serif', 'size':20, 'color':'#0015ff'}
+                                                        },
+                                        {
+                                         'text':f'Highest Reported Death:{daily_confirmed_cases["DailyDeaths"].max():,.0f} on {highest_deaths_date}',
+                                         'xref':'paper',
+                                         'yref':'paper',
+                                         'x':0.5,
+                                         'y':0.4,
+                                         'opacity':0.5,
+                                         'showarrow':False,
+                                         'font':{'family':'Arial, sans-serif', 'size':25, 'color':'red'}       
+                                        }]
                                 }
                         }
 
