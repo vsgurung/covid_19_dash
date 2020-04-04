@@ -15,7 +15,11 @@ from utils.prep_html_tags import    generate_heading_tag, generate_markdown_tag,
 external_stylesheets = ['https://fonts.googleapis.com/css?family=Nunito', dbc.themes.BOOTSTRAP] 
 
 # Setting out the Dash Application
-app = dash.Dash(__name__, assets_folder='./assets/', external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__,
+                assets_folder='./assets/',
+                external_stylesheets=external_stylesheets,
+                meta_tags=[{"name": "viewport", 
+                        "content": "width=device-width, height=device-height, initial-scale=1.0"}])
 
 server = app.server # This line is needed for heroku
 app.title = 'COVID-19 UK Metrics'
