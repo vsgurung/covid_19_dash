@@ -60,6 +60,8 @@ daily_uk_deaths = daily_confirmed_cases.iloc[0]['DailyDeaths']
 daily_confirmed_case_perc= calculate_percent_change(daily_confirmed_cases['CumCases'])
 daily_death_perc = calculate_percent_change(daily_confirmed_cases['CumDeaths'])
 recovered_patients = recovery_data['Cumulative Counts'].max()
+recovery_patients_date = recovery_data['Date'].max().strftime('%d/%m/%Y')
+highest_confirmed_case = daily_confirmed_cases['CMODateCount'].max()
 
 
 # Individual country metrics
