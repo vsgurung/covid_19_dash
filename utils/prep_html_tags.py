@@ -12,7 +12,7 @@ import dash_core_components as dcc
 #                         total_uk_cases, total_uk_deaths, new_uk_cases, recovered_patients
 
 from .prep_data import  dt_for_heading, days_elapsed, daily_confirmed_case_perc, daily_death_perc, \
-                        total_england_cases, total_england_deaths, \
+                        lockdown_days_elapsed, total_england_cases, total_england_deaths, \
                         total_scotland_cases, total_scotland_deaths, \
                         total_ni_cases, total_ni_deaths, \
                         total_wales_cases, total_wales_deaths, \
@@ -54,10 +54,10 @@ def generate_heading_tag():
 def generate_markdown_tag():
     markdown_tag = html.Div([
                             dcc.Markdown(f"""The first confirmed case of COVID-19 in the UK was [reported](https://www.standard.co.uk/news/health/coronavirus-35-cases-timeline-uk-covid19-new-a4375311.html "Evening Standard Report") on 31 Jan 2020. Since then, {days_elapsed} days have elapsed and the number of people affected has increased considerably.
-                                            This dashboard displays the data as of {dt_for_heading}. This data is supplied by [Public Health England](https://www.gov.uk/government/publications/covid-19-track-coronavirus-cases "Public Health England COVID-19 Page").
+                                            In order to control the spread of the virus, the Prime Minister announced [lockdown](https://www.standard.co.uk/news/health/boris-johnson-coronavirus-announcement-lockdown-a4395426.html) on 23 Mar 2020 and {lockdown_days_elapsed} days have gone by. This dashboard displays the data as of {dt_for_heading}. This data is supplied by [Public Health England](https://www.gov.uk/government/publications/covid-19-track-coronavirus-cases "Public Health England COVID-19 Page").
                                             The metrics on this page updates as and when the underlying data powering this dashboard changes. If the data doesn't change, please clear the web browser cache and try refreshing the page again. The National Health Service (NHS) advice regarding COVID-19 for everyone can be found [here](https://www.nhs.uk/conditions/coronavirus-covid-19/). \nThe percentage refers to increase/decrease in past 24 hours. 
                                         """),
-                            dcc.Markdown("""This dashboard is work in progress and is being improved continuously.""")]
+                            dcc.Markdown("""This dashboard is work in progress and is being improved continuously. Currently the website isn't suitable for small screen devices.""")]
                             , style={'textAlign':'justify', 'width':'100%', 'margin':'auto'})
     return markdown_tag
 

@@ -11,6 +11,7 @@ county_ua = fetch_data.county_ua_cases()
 recovery_data = fetch_data.recovered_patients_df()
 # uk_deaths = fetch_data.uk_deaths_df()
 first_case_confirmed_date = '31/01/2020'
+lockdown_date = '23/03/2020'
 
 # Extract the date today and yesterday
 # Using the dates in the data
@@ -45,9 +46,11 @@ def calculate_percent_change(pandas_series):
 
 # Finding the elapsed days
 first_case_confirmed_date = datetime.datetime.strptime('31/01/2020', "%d/%m/%Y").date()
+lockdown_date = datetime.datetime.strptime('23/03/2020', "%d/%m/%Y").date()
 todays_date = latest_date()
 days_diff= todays_date - first_case_confirmed_date
 days_elapsed = days_diff.days
+lockdown_days_elapsed = (todays_date - lockdown_date).days
 
 # Creating date in 12 Mar 2020 format
 dt_for_heading = latest_date().strftime('%d %b %Y')
