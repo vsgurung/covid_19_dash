@@ -66,7 +66,6 @@ recovered_patients = recovery_data['Cumulative Counts'].max()
 recovery_patients_date = recovery_data['Date'].max().strftime('%d/%m/%Y')
 highest_confirmed_case = daily_confirmed_cases['CMODateCount'].max()
 
-
 # Individual country metrics
 total_england_cases = daily_indicators.iloc[0]['EnglandCases']
 total_england_deaths = daily_indicators.iloc[0]['EnglandDeaths']
