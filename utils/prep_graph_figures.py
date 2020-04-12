@@ -13,6 +13,8 @@ highest_confirmedcases_subdf = daily_confirmed_cases[daily_confirmed_cases['CMOD
 highest_recorded_date = highest_confirmedcases_subdf.iloc[0]['DateVal'].strftime('%d %b %Y')
 highest_deaths_subdf = daily_confirmed_cases[daily_confirmed_cases['DailyDeaths']==daily_confirmed_cases['DailyDeaths'].max()]
 highest_deaths_date = highest_deaths_subdf.iloc[0]['DateVal'].strftime('%d %b %Y')
+daily_confirmed_cases['Confirmed_Case_Rate_Change'] = round(daily_confirmed_cases['CMODateCount'].dropna().pct_change()*100, 2)
+daily_confirmed_cases['Death_Rate_Change'] = round(daily_confirmed_cases['DailyDeaths'].dropna().pct_change()*100, 2)
 
 # text = [f'Highest Case:{x:,}' if x==daily_confirmed_cases['CMODateCount'].max() else None for x in daily_confirmed_cases['CMODateCount']]
 
@@ -44,12 +46,39 @@ highest_deaths_date = highest_deaths_subdf.iloc[0]['DateVal'].strftime('%d %b %Y
 #                         }
 
 # Area Plot
+daily_rate_change_figure = { 'data':[
+                                {'x': daily_confirmed_cases['DateVal'],
+                                 'y': daily_confirmed_cases['Confirmed_Case_Rate_Change'],
+                                 'type':'scatter',
+                                 'mode':'lines+markers',
+                                 'name':'Confirmed Cases'
+
+                                },
+                                {'x': daily_confirmed_cases['DateVal'],
+                                 'y': daily_confirmed_cases['Death_Rate_Change'],
+                                 'type':'scatter',
+                                 'mode':'lines+markers',
+                                 'name':'Deaths'
+                                }],
+                        'layout':{
+                                'title':'Daily Rate Change: Confirmed Cases and Deaths',
+                                'titlefont':{'size':20},
+                                'paper_bgcolor':'#B9BBBD',
+                                'plot_bgcolor':'#D1D1D1',
+                                'xaxis':{'tickformat':'%d %b'},
+                                'yaxis':{'tickformat':','},
+                                'legend':{'orientation':'h'}
+                                }
+
+                }
+
+# Line Plot               
 daily_metrics_figure = {'data':[# Adding the daily deaths data
                                  {'x':daily_confirmed_cases['DateVal'],
                                  'y':daily_confirmed_cases['DailyDeaths'],
                                  'type':'scatter',
                                  'mode':'lines',
-                                 'name':'Daily Reported Deaths',
+                                 'name':'Deaths',
                                  'marker':{'color':'rgba(196, 0, 0, 1)'},
                                  'fill':'tonexty',
                                  'fillcolor':' rgba(0, 0, 0, 1)',
@@ -58,7 +87,7 @@ daily_metrics_figure = {'data':[# Adding the daily deaths data
                                  {'x':daily_confirmed_cases['DateVal'],
                                  'y':daily_confirmed_cases['CMODateCount'],
                                  'type':'scatter',
-                                 'name':'Daily Confirmed Cases',
+                                 'name':'Confirmed Cases',
                                  'mode':'lines+markers',
                                  'marker':{'color':'rgba(196, 0, 0, 0.56)'},
                                  'fill':'tonexty',
@@ -113,11 +142,11 @@ daily_metrics_figure = {'data':[# Adding the daily deaths data
                         }
 
 
-
+# Line Plot
 daily_cumulative_figure = {'data':[{'x':daily_confirmed_cases['DateVal'],
                                     'y':daily_confirmed_cases['CumCases'],
                                     'type':'scatter',
-                                    'name':'Cumulative Confirmed Cases',
+                                    'name':'Confirmed Cases',
                                     'mode':'lines+markers',
                                     'marker':{'symbol':'0',
                                               'color':'#f4f4f2',
@@ -156,6 +185,7 @@ daily_cumulative_figure = {'data':[{'x':daily_confirmed_cases['DateVal'],
                                 }                        
                         }
 
+# Bar Chart
 county_ua_figure = {'data':[{'y':fetch_data.county_ua_cases()['GSS_NM'],
                              'x':fetch_data.county_ua_cases()['TotalCases'],
                              'type':'bar',
@@ -172,7 +202,14 @@ county_ua_figure = {'data':[{'y':fetch_data.county_ua_cases()['GSS_NM'],
                                 'paper_bgcolor':'#B9BBBD',
                                 'plot_bgcolor':'#D1D1D1',
                                 'xaxis':{'title':'Total Cases', 'tickformat':','},
-                                'autosize':True,
-                                'height':720
+                                'autosize':True
                         }
                     }
+
+# Map
+def prepare_map_figure():
+        """
+        Function to create the map with all the county/UA data.
+
+        """
+        pass
